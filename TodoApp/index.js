@@ -41,4 +41,7 @@ function deleteTask(e){
         task_container.removeChild(e.target.parentNode)
         
     }
+    if(e.target.classList.contains('task-item')){
+        e.target.classList.toggle('completed')
+    }
 }

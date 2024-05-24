@@ -40,3 +40,6 @@ body{
     height: 30vh;
     
 }
+.completed{
+    text-decoration-line: line-through;
+}
