@@ -42,6 +42,7 @@ function deleteTask(e){
         
     }
     if(e.target.classList.contains('task-item')){
+        
         e.target.classList.toggle('completed')
     }
 }
