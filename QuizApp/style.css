@@ -1,0 +1,73 @@
+html {
+  height: 100%;
+  width: 100%;
+
+
+}
+
+body {
+  background: lightskyblue;
+  display: flex;
+  height: 100vh;
+}
+
+.quiz_box {
+  height: 50vh;
+  width: 50vw;
+  background: white;
+  margin: auto;
+  max-width: 400px;
+  min-width: 300px
+}
+
+.question {
+  height: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-direction: column;
+  padding: .5rem 2rem;
+}
+
+.option {
+  background-color: lightsteelblue;
+  width: 100%;
+  padding: 2px;
+}
+
+
+.selected {
+  background: greenyellow;
+  cursor: pointer;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.start {
+  margin: auto;
+}
+
+.response {
+  display: flex;
+  justify-content: end;
+}
+
+
+.submit,
+.next,
+.prev {
+  margin: 0 .5rem;
+}
+
+.answered {
+  background: red;
+  cursor: pointer;
+}
+
+.correct {
+  background: greenyellow;
+  cursor: pointer;
+}
