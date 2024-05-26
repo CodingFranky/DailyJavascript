@@ -1,12 +1,21 @@
-async function fetchProducts(url) {
+async function fetchProducts() {
 
-  const response = await fetch(url);
+  const response = await fetch('https://dummyjson.com/products?limit=30&skip=30');
   const data = await response.json();
   return data.products;
 }
+let productsList = [];
 
-async function getProducts(params) {
-  let products = await fetchProducts('https://dummyjson.com/products?limit=30&skip=30');
+(async () => {
+  productsList = await fetchProducts();
+  //console.log(products) //this will have values but will be displayed later in console due to async nature of the function
+  getProducts()
+})();
+//console.log(products) //this will return [] because this will be executed first and hence []
+
+
+function getProducts(params) {
+  let products = productsList;
   let categories = products.map((item => item.category))
   categories = new Set(categories)
   let string = ''
@@ -37,7 +46,7 @@ async function getProducts(params) {
   document.querySelector(`.category_btn`).innerHTML = string
 
 }
-getProducts()
+
 
 function searchProduct() {
   const filter = document.querySelector(".inputField").value
@@ -54,5 +63,30 @@ function searchCategory(e) {
     getProducts()
   }
 }
+
+function searchSuggestion() {
+  let products = productsList;
+  const search = document.querySelector(".inputField").value.toLowerCase();
+  let string = '';
+  if (search.length > 1) {
+    const searched_items = products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()));
+    searched_items.forEach((item) => {
+      string = string + `<p id=search_name>${item.title}</p>`
+    })
+  }
+  document.querySelector('.suggestion_box').innerHTML = string;
+
+}
+
+
+
 document.querySelector(".search").addEventListener("click", searchProduct)
 document.querySelector(".category_btn").addEventListener("click", (e) => searchCategory(e))
+document.querySelector(".inputField").addEventListener("input", searchSuggestion)
+document.querySelector('.suggestion_box').addEventListener("click", (e) => {
+  console.log(e.target.innerText);
+  getProducts({ filter: e.target.innerText });
+  document.querySelector('.suggestion_box').innerHTML = '';
+})
+
+
